@@ -1,39 +1,61 @@
-class Solution {
+class Count_Occurence_of_Anagram {
     public List<Integer> findAnagrams(String txt, String pat) {
         List<Integer> ans = new ArrayList<>();
         HashMap<Character, Integer> map1 = new HashMap<>();
-        for(int i=0; i<pat.length(); i++) {
+        for (int i = 0; i < pat.length(); i++) {
             map1.put(pat.charAt(i), map1.getOrDefault(pat.charAt(i), 0) + 1);
         }
-        
-        
-        int i=0;
-        int j=0;
+
+        int i = 0;
+        int j = 0;
         int k = pat.length();
         int count = map1.size();
-        while(j<txt.length()) {
-            if(map1.containsKey(txt.charAt(j))) {
-                map1.put(txt.charAt(j), map1.get(txt.charAt(j))-1);
-                if(map1.get(txt.charAt(j)) == 0) count--;
+        while (j < txt.length()) {
+            if (map1.containsKey(txt.charAt(j))) {
+                map1.put(txt.charAt(j), map1.get(txt.charAt(j)) - 1);
+                if (map1.get(txt.charAt(j)) == 0)
+                    count--;
             }
-        
-            if(j-i+1 < k) {
+
+            if (j - i + 1 < k) {
                 j++;
             }
 
-            else if(j-i+1 == k) {
-                if(count == 0){
-                   ans.add(i);
+            else if (j - i + 1 == k) {
+                if (count == 0) {
+                    ans.add(i);
                 }
-                if(map1.containsKey(txt.charAt(i)))     
-                    {
-                        map1.put(txt.charAt(i), map1.getOrDefault(txt.charAt(i), 0) + 1);
-                if(map1.get(txt.charAt(i)) == 1) count++;
+                if (map1.containsKey(txt.charAt(i))) {
+                    map1.put(txt.charAt(i), map1.getOrDefault(txt.charAt(i), 0) + 1);
+                    if (map1.get(txt.charAt(i)) == 1)
+                        count++;
 
-                    }
+                }
                 i++;
                 j++;
             }
+        }
+        return ans;
+    }
+}
+
+
+===============BRUTE FORCE==================
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+        char[] arr_p = p.toCharArray();
+        Arrays.sort(arr_p);
+        String p1 = new String(arr_p);
+        
+        int idx = 0;
+        for(int i=0; i<s.length() - p.length() + 1; i++) {
+            String s1 = new String(s.substring(i,i+p.length()));
+            char[] arr_s = s1.toCharArray();
+            Arrays.sort(arr_s);
+            String s2 = new String(arr_s);
+            
+            if(p1.equals(s2)) ans.add(i);
         }
         return ans;
     }
