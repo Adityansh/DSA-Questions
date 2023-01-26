@@ -1,0 +1,43 @@
+PROBLEM LINK= https://practice.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+
+===================HashMap=====================
+
+class Solution{
+    
+   
+    // Function for finding maximum and value pair
+    public static int lenOfLongSubarr (int A[], int N, int K) {
+        //Complete the function
+        int max = 0;
+        int curr_sum = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        map.put(0,-1);
+        for(int i=0; i<N; i++) {
+            curr_sum = curr_sum + A[i];
+            if(map.containsKey(curr_sum-K)) {
+                max = Math.max(max, i-map.get(curr_sum-K));
+            }
+            if(!map.containsKey(curr_sum))
+            map.put(curr_sum,i);
+        }
+        return max;
+}
+}
+
+======================Brute Forcce ===================
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int max = 0;
+        int sum = 0;
+        for(int i=0;  i<nums.length; i++) {
+            for(int j=i; j<nums.length; j++) {
+                sum = sum + nums[j];
+                if(sum == k) {
+                    max = max + 1;
+                }
+            }
+            sum = 0;
+        }
+        return max;
+    }
+}
