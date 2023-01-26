@@ -1,6 +1,6 @@
 PROBLEM LINK = https://leetcode.com/problems/sliding-window-maximum/submissions/882937641/
 
-=======================SLIDING WINDOW========================
+=======================SLIDING WINDOW SOLUTION=========================
 
 public class Maximum_of_all_subarray_in_k {
     class Solution {
