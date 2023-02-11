@@ -1,0 +1,39 @@
+    static void reverse(Stack<Integer> s)
+    {
+        // add your code here
+        s = rev(s);
+        return;
+    }
+    
+    static Stack<Integer> rev(Stack<Integer> s) {
+        //base
+        if(s.size() == 1) {
+            return s;
+        }
+        
+        //hypothesis
+        int temp = s.peek();
+        s.pop();
+        rev(s);
+        
+        //induction
+        s = insert(s,temp);
+        return s;
+    }
+    
+    static Stack<Integer> insert(Stack<Integer> s, int ele) {
+        //base
+        if(s.size() == 0) {
+            s.push(ele);
+            return s;
+        }
+        
+        //hypothesis
+        int temp = s.peek();
+        s.pop();
+        s = insert(s,ele);
+        
+        //induction
+        s.push(temp);
+        return s;
+    } 
