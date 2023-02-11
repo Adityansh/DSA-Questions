@@ -1,0 +1,47 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        for(int i : nums) {
+            arr.add(i);
+        }
+        arr = sort(arr);
+        for(int i=0; i<arr.size(); i++) {
+            nums[i] = arr.get(i);
+        }
+        return nums;
+    }
+
+    public ArrayList<Integer> sort(ArrayList<Integer> list) {
+        //base
+        if(list.size() == 1) {
+            return list;
+        } 
+
+        //hypothesis
+        int element = list.get(list.size() - 1);
+        list.remove(list.size() - 1);
+        list = sort(list);
+
+        //indcution
+        list = insert(list,element);
+        return list;
+    } 
+
+    public ArrayList<Integer> insert(ArrayList<Integer> al, int ele) {
+        //base
+        if(al.size() == 0 || al.get(al.size()-1) < ele) {
+            al.add(ele);
+            return al;
+        }
+
+        //hypothesis
+        int temp = al.get(al.size() - 1);
+        al.remove(al.size() -1);
+        al = insert(al, ele);
+
+        //induction
+        al.add(temp);
+        return al;
+    }
+}
