@@ -1,0 +1,28 @@
+class Solution
+{
+    public List<String> AllPossibleStrings(String s)
+    {
+        // Code here
+        List<String> ans = new ArrayList<>();
+        ans = solve(s, "", ans);
+        ans.remove(0);
+        Collections.sort(ans);
+        return ans;
+    }
+    
+    public List<String> solve(String ip, String op, List<String> ans) {
+        if(ip.length() == 0) {
+            ans.add(op);
+            return ans;
+        }
+        
+        String op1 = op;
+        String op2 = op+ip.charAt(0);
+        ip = ip.substring(1);
+        
+        ans = solve(ip,op1,ans);
+        ans = solve(ip,op2,ans);
+        return ans;
+        
+    }
+}
