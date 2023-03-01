@@ -1,0 +1,40 @@
+class Solution {
+    public List<String> letterCasePermutation(String s) {
+        String ip = s;
+        String op = "";
+        List<String> ans = new ArrayList<>();
+        ans = solve(ip,op,ans);
+        return ans;
+    }
+
+    public List<String> solve(String ip, String op, List<String> ans) {
+        if(ip.length() == 0) {
+            ans.add(op);
+            return ans;
+        }
+
+        String op1 = op;
+        String op2 = op;
+        boolean flag = false;
+        if(!(ip.charAt(0)>= 'a' && ip.charAt(0)<= 'z' || ip.charAt(0)>= 'A' && ip.charAt(0)<= 'Z')) {
+            op1 = op1 + ip.charAt(0);
+            op2 = op2 + ip.charAt(0);
+            flag = true;
+        }
+        else{
+            op1 = op1 + Character.toUpperCase(ip.charAt(0));   
+            op2 = op2 + Character.toLowerCase(ip.charAt(0));
+        }
+
+        ip = ip.substring(1);
+        if(flag == true) {
+            ans = solve(ip,op1,ans);
+        }
+        else{
+            ans = solve(ip,op1,ans);
+            ans = solve(ip,op2,ans);
+        }
+
+        return ans;
+    }
+}
