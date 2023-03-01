@@ -1,0 +1,33 @@
+Problem link = https://practice.geeksforgeeks.org/problems/permutation-with-spaces3627/1;
+
+class Solution{
+
+    ArrayList<String> permutation(String S){
+        // Code Here
+        String op = "";
+        op = op + S.charAt(0);
+        String ip = S.substring(1);
+        ArrayList<String> ans = new ArrayList<String>();
+
+        ans = solve(ip, op, ans);
+
+        return ans;
+    }
+
+    ArrayList<String> solve(String ip, String op, ArrayList<String> ans) {
+        if(ip.length() == 0) {
+            ans.add(op);
+            return ans;
+        }
+
+        String op1 = op + " " + ip.charAt(0);
+        String op2 = op + ip.charAt(0);
+
+        ip = ip.substring(1);
+
+        ans = solve(ip,op1,ans);
+        ans = solve(ip,op2,ans);
+
+        return ans;
+
+    }
