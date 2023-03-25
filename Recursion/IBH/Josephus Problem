@@ -1,0 +1,31 @@
+class Solution {
+    public int findTheWinner(int n, int k) {
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        for(int i=1; i<=n; i++) {
+            arr.add(i);
+        }
+        int ans = 0;
+
+        ans = solve(arr, k-1, 0, ans);
+        return ans;
+    }
+
+    public int solve(ArrayList<Integer> arr, int k, int index, int ans) {
+        //base condition
+        if(arr.size() == 1) {
+            ans = arr.get(0);
+            return ans;
+        }
+
+        //hypothesis->our function will give us the ans
+        //hypothesis call on smaller input
+
+        index = (index + k)%arr.size();
+        arr.remove(index);
+        ans = solve(arr, k, index, ans);
+
+        //no inductuin needed
+        return ans;
+
+    }
+}
