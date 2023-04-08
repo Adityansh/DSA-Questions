@@ -1,0 +1,32 @@
+class Tree
+{
+    //Function to return list containing elements of left view of binary tree.
+    ArrayList<Integer> leftView(Node root)
+    {
+      // Your code here
+      
+      ArrayList<Integer> ans = new ArrayList<Integer>();
+      if(root == null) return ans;
+      ans = solve(root, ans, 0);
+      return ans;
+      
+    }
+    
+    public ArrayList<Integer> solve (Node root, ArrayList<Integer> ans, int level) {
+        if(root == null) {
+            return ans;
+        }
+        
+        if(ans.size() == level) {
+            ans.add(root.data);
+        }
+        
+        ans = solve(root.left, ans, level+1);
+        
+        ans = solve(root.right, ans, level+1);
+        
+        
+        
+        return ans;
+    }
+}
