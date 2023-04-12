@@ -1,0 +1,48 @@
+
+     public static class tuple {
+        Node node;
+        int ver;
+        
+        public tuple(Node node, int ver) {
+            this.node = node;
+            this.ver = ver;
+        }
+    }
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    static ArrayList<Integer> topView(Node root)
+    {
+       
+    //Function to return a list containing the bottom view of the given tree.
+
+        // Code here
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        Queue<tuple> q = new LinkedList<>();
+        if(root!=null) {
+            q.add(new tuple(root,0));
+        }
+        while(!q.isEmpty()) {
+            tuple t = q.remove();
+            Node node = t.node;
+            int ver = t.ver;
+            
+            if(!map.containsKey(ver))
+            map.put(ver,node.data);
+            
+            if(node.left!=null) {
+                q.add(new tuple(node.left,ver-1));
+            }
+            
+            if(node.right != null) {
+                q.add(new tuple(node.right, ver+1));
+            }
+            
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int val: map.values()) {
+            ans.add(val);
+        }
+        
+        return ans;
+    }
+        
