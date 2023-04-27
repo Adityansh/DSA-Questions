@@ -1,0 +1,37 @@
+// Level order method (Non recursive)
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+
+        if(root == null) return 0;
+        int height = 0;
+        q.add(root);
+
+        while(!q.isEmpty()) {
+            int size = q.size();
+            for(int i=0; i<size; i++) {
+                if(q.peek().left != null) q.add(q.peek().left);
+                if(q.peek().right != null) q.add(q.peek().right);
+                q.poll();
+            }
+            height = height + 1;
+        }
+
+        return height;   
+    }
+}
+
+
+// Recursive method 
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+
+        int lh = maxDepth(root.left);
+        int rh = maxDepth(root.right);
+        
+        return 1 + Math.max(lh, rh);   
+    }
+}
